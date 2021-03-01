@@ -1,11 +1,17 @@
 import React, { Component } from "react";
-import "./App.css";
-// import Data from "./Data";
-import api from "./config";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+// import components
+import Courses from "./components/Courses";
+
+/**
+ * App Component
+ *  - main container component
+ */
 
 class App extends Component {
-  // make GET request to /courses route
-  // fetch the data then log it out
+  /* tests connection between api and client:
+  if connected successfully, will log out data
   constructor() {
     super();
     this.state = {
@@ -15,25 +21,26 @@ class App extends Component {
 
   componentDidMount() {
     this.setState({ loading: true });
-    fetch("http://localhost:5000")
+    fetch("http://localhost:5000/api/courses")
       .then((response) => response.json())
       .then((data) => {
         this.setState({
           data: data,
         });
-        console.log("what is data", data);
+        console.log("here is data logging from api: ", data);
       });
   }
-
-  render() {
-    return (
-      // JSX to render goes here
-      <div className="course-wrapper">
-        <h1 className="course-heading">Course Titles</h1>
-        <ul></ul>
-      </div>
-    );
-  }
+  */
 }
 
-export default App;
+export default () => (
+  <Router>
+    <div>
+      <Switch>
+        <Courses />
+      </Switch>
+    </div>
+  </Router>
+);
+
+// export default App;

@@ -8,9 +8,9 @@ const cors = require("cors");
 const { sequelize } = require("./models");
 
 // import the routes
-// const usersRoutes = require("./routes/user");
-// const coursesRoutes = require("./routes/course");
-const routes = require("./routes");
+const usersRoutes = require("./routes/user");
+const coursesRoutes = require("./routes/course");
+// const routes = require("./routes");
 
 // variable to enable global error logging
 const enableGlobalErrorLogging =
@@ -48,9 +48,8 @@ app.get("/", (req, res) => {
 })();
 
 // tell routes to use api prefix
-app.use("/api", routes);
-// app.use("/api", usersRoutes);
-// app.use("/api", coursesRoutes);
+app.use("/api", usersRoutes);
+app.use("/api", coursesRoutes);
 
 // send 404 if no other route matched
 app.use((req, res) => {

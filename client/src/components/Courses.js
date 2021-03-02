@@ -10,40 +10,68 @@ import axios from "axios";
  *  - component renders a link to the "Create Course" screen
  */
 export default class Courses extends Component {
-  constructor() {
-    // lets us use this keyword within the Courses class
-    super();
-    this.state = {
-      courses: [],
-    };
-  }
+  state = {
+    // populate array with fetched data
+    courses: [],
+  };
 
-  // fetch this - http://localhost:5000/api/courses"
-
-  // do axios request
-
+  // component first mounts (or on reload), make axios call to API to retrieve the list of courses in the database
   componentDidMount() {
     axios
       .get(`http://localhost:5000/api/courses`)
-      .then((response) => {
-        console.log("What does response look like", response);
+      .then((data) => {
+        console.log("What does data look like", data);
         this.setState({
-          courses: response.data,
+          courses: data.data,
+          user: data.data.User,
         });
+        console.log(this.state.courses);
       })
       .catch((error) => {
         console.log("Error fetching and parsing data", error);
         // push onto error stack
+        this.props.history.push("/error");
       });
   }
 
-  // componentDidUpdate()
+  componentDidUpdate(loadedProps) {
+    if (loadedProps.location.pathname !== this.props.location.pathname) {
+      axios
+        .get(`http://localhost:5000/api/courses`)
+        .then((data) => {
+          this.setState({
+            courses: data.data,
+            user: data.data.User,
+          });
+          console.log(this.state.courses);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }
 
   // then populate the DOM with the fetched data
-
   render() {
+    const results = this.state.courses;
+
+    let courses = results.map((course) => (
+      <React.Fragment key={course.id}>
+        <div className="grid-33">
+          <Link
+            className="course--module course--link"
+            to={`/courses/${course.id}`}
+          >
+            <h4 className="course--label">Course</h4>
+            <h3 className="course--title">{course.title}</h3>
+          </Link>
+        </div>
+      </React.Fragment>
+    ));
+
     return (
       <div className="bounds">
+        {courses}
         <div className="grid-33">
           <Link
             className="course--module course--add--module"

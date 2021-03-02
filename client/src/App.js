@@ -8,9 +8,9 @@ import Courses from "./components/Courses";
  * App Component
  *  - main container component
  */
-
+/* 
 class App extends Component {
-  /* tests connection between api and client:
+  tests connection between api and client:
   if connected successfully, will log out data
   constructor() {
     super();
@@ -18,7 +18,6 @@ class App extends Component {
       data: {},
     };
   }
-
   componentDidMount() {
     this.setState({ loading: true });
     fetch("http://localhost:5000/api/courses")
@@ -30,17 +29,20 @@ class App extends Component {
         console.log("here is data logging from api: ", data);
       });
   }
-  */
+  
 }
+*/
 
-export default () => (
-  <Router>
-    <div>
-      <Switch>
-        <Courses />
-      </Switch>
-    </div>
-  </Router>
-);
+const App = () => {
+  return (
+    <Router>
+      <div>
+        <Switch>
+          <Route path="/courses" Redirect to="/" component={Courses} />
+        </Switch>
+      </div>
+    </Router>
+  );
+};
 
-// export default App;
+export default App;

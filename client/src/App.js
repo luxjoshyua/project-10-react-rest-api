@@ -1,8 +1,16 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // import components
-import Courses from "./components/Courses";
+import Header from './components/Header';
+import Courses from './components/Courses';
+import UserSignUp from './components/UserSignUp';
+
+import withContext from './Context';
+
+// connect Header component to Context
+const HeaderWithContext = withContext(Header);
+const UserSignUpWithContext = withContext(UserSignUp);
 
 /**
  * App Component
@@ -36,9 +44,12 @@ class App extends Component {
 const App = () => {
   return (
     <Router>
+      <HeaderWithContext />
       <div>
         <Switch>
-          <Route path="/courses" Redirect to="/" component={Courses} />
+          {/* FIXME: this redirect is breaking */}
+          <Route path='/courses' Redirect to='/' component={Courses} />
+          <Route path='/signup' component={UserSignUpWithContext} />
         </Switch>
       </div>
     </Router>

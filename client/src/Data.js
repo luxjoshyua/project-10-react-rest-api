@@ -1,9 +1,9 @@
-import config from "./config";
+import config from './config';
 
 export default class Data {
   api(
     path,
-    method = "GET",
+    method = 'GET',
     body = null,
     requiresAuth = false,
     credentials = null
@@ -13,7 +13,7 @@ export default class Data {
     const options = {
       method,
       headers: {
-        "Content-Type": "application/json; charset=utf-8",
+        'Content-Type': 'application/json; charset=utf-8',
       },
     };
 
@@ -24,7 +24,8 @@ export default class Data {
     /* check if auth is required - are we making a request to a protected route on the server
       if yes, encode user credentials and set HTTP Authorization request header to Basic authentication type,
       followed by encoded user credentials
-    
+      */
+
     if (requiresAuth) {
       // btoa() creates base-64 encoded string
       const encodedCredentials = btoa(
@@ -33,16 +34,15 @@ export default class Data {
 
       // hold the credentials to authenticate the client with the server
       // encodedCredentials is a series of letters and numbers
-      options.headers["Authorization"] = `Basic ${encodedCredentials}`;
+      options.headers['Authorization'] = `Basic ${encodedCredentials}`;
     }
-    */
 
     return fetch(url, options);
   }
 
   // API GET user
   async getUser(username, password) {
-    const response = await this.api(`/users`, "GET", null, true, {
+    const response = await this.api(`/users`, 'GET', null, true, {
       username,
       password,
     });
@@ -57,7 +57,7 @@ export default class Data {
 
   // API POST create user
   async createUser(user) {
-    const response = await this.api("/users", "POST", user);
+    const response = await this.api('/users', 'POST', user);
     if (response.status === 201) {
       return [];
     } else if (response.status === 400) {

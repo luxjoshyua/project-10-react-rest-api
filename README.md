@@ -15,9 +15,8 @@ In this project, we had to use React to create a client for our existing school 
 - If the app doesn't automatically open a new instance, navigate to `http://localhost:3000` to view the app
 - To sign in to the app, use the following credentials:
 
-1. TBC
-2. TBC
-3. TBC
+1. email: `joe@smith.com`, password: `joepassword`
+2. email: `sally@jones.com`, password: `sallypassword`
 
 ## Technologies
 

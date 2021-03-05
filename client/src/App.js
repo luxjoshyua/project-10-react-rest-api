@@ -52,8 +52,8 @@ const App = () => (
       <Switch>
         <Route exact path='/' component={Courses} />
         <Route path='/courses' Redirect to='/' component={Courses} />
-        <Route path='/signup' component={UserSignUpWithContext} />
         <Route path='/signin' component={UserSignInWithContext} />
+        <Route path='/signup' component={UserSignUpWithContext} />
         <Route path='/signout' component={UserSignOutWithContext} />
       </Switch>
     </div>

@@ -29,16 +29,15 @@ export default class Data {
     if (requiresAuth) {
       // btoa() creates base-64 encoded string
       const encodedCredentials = btoa(
-        `${credentials.username}:${credentials.password}`
+        `${credentials.emailAddress}:${credentials.password}`
       );
+
+      console.log('here are my encoded credentials = ', encodedCredentials);
 
       // hold the credentials to authenticate the client with the server
       // encodedCredentials is a series of letters and numbers
       options.headers['Authorization'] = `Basic ${encodedCredentials}`;
     }
-
-    // console.log('here is my url = ', url);
-    console.log('here are my options = ', options);
 
     return fetch(url, options);
   }
@@ -57,6 +56,8 @@ export default class Data {
       throw new Error();
     }
   }
+
+  // posts the request successfully, but the GET returns a 401
 
   // makes POST request to the API to create new user
   async createUser(user) {

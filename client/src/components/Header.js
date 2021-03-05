@@ -28,7 +28,7 @@ export default class Header extends React.PureComponent {
           <nav>
             {authUser ? (
               <React.Fragment>
-                <span>Welcome, {authUser.name}</span>
+                <span>Welcome, {authUser.firstName}</span>
                 <Link to='/signout'>Sign Out</Link>
               </React.Fragment>
             ) : (

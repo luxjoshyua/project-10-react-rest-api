@@ -55,7 +55,7 @@ export class Provider extends Component {
       // first argument specifies the name of the cookie to set
       // second argument specifies the value to store in the cookie: user is an object so need to convert to string
       // third argument is object to set additional cookie options e.g. cookie expires in 1 day
-      Cookies.set('authenticatedUser', JSON.stringify(user), { expires: 1 });
+      // Cookies.set('authenticatedUser', JSON.stringify(user), { expires: 1 });
     }
     return user;
   };

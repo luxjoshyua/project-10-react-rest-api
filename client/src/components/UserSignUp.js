@@ -11,14 +11,15 @@ import Form from './Form';
  */
 export default class UserSignUp extends Component {
   state = {
-    name: '',
-    username: '',
+    firstName: '',
+    lastName: '',
     password: '',
+    emailAddress: '',
     errors: [],
   };
 
   render() {
-    const { name, username, password, errors } = this.state;
+    const { firstName, lastName, emailAddress, password, errors } = this.state;
 
     return (
       <div className='bounds'>
@@ -32,20 +33,28 @@ export default class UserSignUp extends Component {
             elements={() => (
               <React.Fragment>
                 <input
-                  id='name'
-                  name='name'
+                  id='firstName'
+                  name='firstName'
                   type='text'
-                  value={name}
+                  value={firstName}
                   onChange={this.change}
-                  placeholder='Name'
+                  placeholder='First Name'
                 />
                 <input
-                  id='username'
-                  name='username'
+                  id='lastName'
+                  name='lastName'
                   type='text'
-                  value={username}
+                  value={lastName}
                   onChange={this.change}
-                  placeholder='User Name'
+                  placeholder='Last Name'
+                />
+                <input
+                  id='emailAddress'
+                  name='emailAddress'
+                  type='text'
+                  value={emailAddress}
+                  onChange={this.change}
+                  placeholder='Email Address'
                   autoComplete='username'
                 />
                 <input
@@ -69,6 +78,7 @@ export default class UserSignUp extends Component {
     );
   }
 
+  // change method changes the state of the name with each input
   change = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -80,16 +90,20 @@ export default class UserSignUp extends Component {
     });
   };
 
+  // submit function calls the createUser function so the user can be created in the api
   submit = () => {
     const { context } = this.props;
-    const { name, username, password } = this.state;
+    const { firstName, lastName, emailAddress, password } = this.state;
 
     // create user
     const user = {
-      name,
-      username,
+      firstName,
+      lastName,
+      emailAddress,
       password,
     };
+
+    console.log('here is my created user on signup = ', user);
 
     context.data
       .createUser(user)
@@ -97,8 +111,8 @@ export default class UserSignUp extends Component {
         if (errors.length) {
           this.setState({ errors });
         } else {
-          context.actions.signIn(username, password).then(() => {
-            this.props.history.push('/authenticated');
+          context.actions.signIn(emailAddress, password).then(() => {
+            this.props.history.push('/');
           });
         }
       })

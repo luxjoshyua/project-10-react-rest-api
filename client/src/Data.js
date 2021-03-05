@@ -37,13 +37,16 @@ export default class Data {
       options.headers['Authorization'] = `Basic ${encodedCredentials}`;
     }
 
+    // console.log('here is my url = ', url);
+    console.log('here are my options = ', options);
+
     return fetch(url, options);
   }
 
   // API GET user
-  async getUser(username, password) {
+  async getUser(emailAddress, password) {
     const response = await this.api(`/users`, 'GET', null, true, {
-      username,
+      emailAddress,
       password,
     });
     if (response.status === 200) {
@@ -55,15 +58,18 @@ export default class Data {
     }
   }
 
-  // API POST create user
+  // makes POST request to the API to create new user
   async createUser(user) {
     const response = await this.api('/users', 'POST', user);
     if (response.status === 201) {
+      console.log('user successfully created');
       return [];
     } else if (response.status === 400) {
       return response.json().then((data) => {
         return data.errors;
       });
+    } else if (response.status === 500) {
+      this.props.history.push('/error');
     } else {
       throw new Error();
     }

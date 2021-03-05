@@ -41,19 +41,17 @@ class App extends Component {
 }
 */
 
-const App = () => {
-  return (
-    <Router>
-      <HeaderWithContext />
-      <div>
-        <Switch>
-          {/* FIXME: this redirect is breaking */}
-          <Route path='/courses' Redirect to='/' component={Courses} />
-          <Route path='/signup' component={UserSignUpWithContext} />
-        </Switch>
-      </div>
-    </Router>
-  );
-};
+const App = () => (
+  <Router>
+    <HeaderWithContext />
+    <div>
+      <Switch>
+        <Route path='/courses' Redirect to='/' component={Courses} />
+        <Route path='/signup' component={UserSignUpWithContext} />
+        <Route exact path='/' component={Courses} />
+      </Switch>
+    </div>
+  </Router>
+);
 
 export default App;

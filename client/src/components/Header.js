@@ -13,12 +13,10 @@ export default class Header extends React.PureComponent {
   render() {
     // extract context from this.props
     const { context } = this.props;
-    console.log(this.props);
+    // console.log(this.props);
     // store the authenticatedUser data in a variable
-    // const authUser = context.authenticatedUser;
-    const authUser = {};
-    // there is no authUser in state yet, hence it's breaking
-    console.log('What does authUser equal = ', authUser);
+    const authUser = context.authenticatedUser;
+    console.log('Auth user = ', authUser);
 
     // React.Fragment groups a list of children without adding extra nodes to the DOM
     // if there is an authenticated user stored in context, render a welcome message and a 'sign out' link

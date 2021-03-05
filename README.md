@@ -7,12 +7,17 @@ In this project, we had to use React to create a client for our existing school 
 ## Usage
 
 - Clone the repo
-- Install dependencies using `$ npm install`
-- Start the server using `$ npm start`
-- Create the database using `$ npm run seed`
-- Navigate to the browser of choice and enter `http://localhost:5000/` to run the app locally
-- You should see a `Welcome to the REST API project!` message
-- To test the various routes, import the `RESTAPI.postman_collection.json` file into Postman
+- Open two terminals: one for api, one for client
+- Install dependencies for api using `$ npm install`
+- Install dependencies for client using `$ npm install`
+- Start the server for api using `$ npm start`
+- Start the server for client using `$ npm start`
+- If the app doesn't automatically open a new instance, navigate to `http://localhost:3000` to view the app
+- To sign in to the app, use the following credentials:
+
+1. TBC
+2. TBC
+3. TBC
 
 ## Technologies
 

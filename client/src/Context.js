@@ -34,7 +34,7 @@ export class Provider extends Component {
       },
     };
 
-    console.log('what is authenticatedUser equal to', authenticatedUser);
+    // console.log('what is authenticatedUser equal to', authenticatedUser);
 
     return (
       // value={value} represents an object containing the context to be shared throughout the component tree
@@ -42,9 +42,8 @@ export class Provider extends Component {
     );
   }
 
-  signIn = async (username, password) => {
-    const user = await this.data.getUser(username, password);
-    console.log('what is user', typeof user);
+  signIn = async (emailAddress, password) => {
+    const user = await this.data.getUser(emailAddress, password);
     // check if there is a user object
     if (user !== null) {
       this.setState(() => {

@@ -4,9 +4,9 @@ import Form from './Form';
 
 /**
  * UserSignUp component
- *  - /users route
+ *  - /signup route
  *  - renders form to sign up a user
- *  - renders 'sign up' button that sends POST request to the REST API's /api/users route and signs in user
+ *  - renders sign up button that sends POST request to the REST API's /api/users route and signs in user
  *  - renders a cancel button that returns user to the default route (i.e. list of courses)
  */
 export default class UserSignUp extends Component {

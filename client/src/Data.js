@@ -32,8 +32,6 @@ export default class Data {
         `${credentials.emailAddress}:${credentials.password}`
       );
 
-      console.log('here are my encoded credentials = ', encodedCredentials);
-
       // hold the credentials to authenticate the client with the server
       // encodedCredentials is a series of letters and numbers
       options.headers['Authorization'] = `Basic ${encodedCredentials}`;

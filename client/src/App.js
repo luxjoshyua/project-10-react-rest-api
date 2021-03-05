@@ -5,12 +5,16 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from './components/Header';
 import Courses from './components/Courses';
 import UserSignUp from './components/UserSignUp';
+import UserSignIn from './components/UserSignIn';
+import UserSignOut from './components/UserSignOut';
 
 import withContext from './Context';
 
 // connect Header component to Context
 const HeaderWithContext = withContext(Header);
 const UserSignUpWithContext = withContext(UserSignUp);
+const UserSignInWithContext = withContext(UserSignIn);
+const UserSignOutWithContext = withContext(UserSignOut);
 
 /**
  * App Component
@@ -46,9 +50,11 @@ const App = () => (
     <HeaderWithContext />
     <div>
       <Switch>
+        <Route exact path='/' component={Courses} />
         <Route path='/courses' Redirect to='/' component={Courses} />
         <Route path='/signup' component={UserSignUpWithContext} />
-        <Route exact path='/' component={Courses} />
+        <Route path='/signin' component={UserSignInWithContext} />
+        <Route path='/signout' component={UserSignOutWithContext} />
       </Switch>
     </div>
   </Router>

@@ -65,9 +65,10 @@ export default class CourseDetail extends Component {
           <div className='bounds'>
             <div className='grid-100'>
               <span>
-                {/* <Link className='button' to={`/courses/${course.id}/update`}>
+                <Link className='button' to={`/courses/${result.id}/update`}>
                   Update Course
-                </Link> */}
+                </Link>
+                {/* sends a delete request to /api/courses/:id route */}
                 <Link className='button' to={`/`}>
                   Delete Course
                 </Link>

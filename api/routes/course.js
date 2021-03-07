@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 
-const express = require("express");
-const { Course, User } = require("../models");
-const { asyncHandler } = require("../middleware/async-handler");
-const { authenticateUser } = require("../middleware/auth-user");
+const express = require('express');
+const { Course, User } = require('../models');
+const { asyncHandler } = require('../middleware/async-handler');
+const { authenticateUser } = require('../middleware/auth-user');
 
 // construct router instance
 const router = express.Router();
@@ -14,21 +14,21 @@ const router = express.Router();
  *  - returns 200 HTTP status code
  */
 router.get(
-  "/courses",
+  '/courses',
   asyncHandler(async (req, res) => {
     // find all courses
     const courses = await Course.findAll({
       attributes: [
-        "id",
-        "title",
-        "description",
-        "estimatedTime",
-        "materialsNeeded",
+        'id',
+        'title',
+        'description',
+        'estimatedTime',
+        'materialsNeeded',
       ],
       include: [
         {
           model: User,
-          attributes: ["id", "firstName", "lastName", "emailAddress"],
+          attributes: ['id', 'firstName', 'lastName', 'emailAddress'],
         },
       ],
     });
@@ -43,28 +43,28 @@ router.get(
  *  - returns 200 HTTP status code
  */
 router.get(
-  "/courses/:id",
+  '/courses/:id',
   asyncHandler(async (req, res) => {
     try {
       // get the corresponding course
       const course = await Course.findByPk(req.params.id, {
         attributes: [
-          "id",
-          "title",
-          "description",
-          "estimatedTime",
-          "materialsNeeded",
+          'id',
+          'title',
+          'description',
+          'estimatedTime',
+          'materialsNeeded',
         ],
         include: {
           model: User,
-          attributes: ["id", "firstName", "lastName", "emailAddress"],
+          attributes: ['id', 'firstName', 'lastName', 'emailAddress'],
         },
       });
 
       if (course) {
         res.status(200).json(course);
       } else {
-        res.status(404).json({ message: "Course not found" });
+        res.status(404).json({ message: 'Course not found' });
       }
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -79,7 +79,7 @@ router.get(
  *  - returns 201 HTTP status code and no content
  */
 router.post(
-  "/courses",
+  '/courses',
   authenticateUser,
   asyncHandler(async (req, res) => {
     try {
@@ -88,7 +88,7 @@ router.post(
       res.location(`/courses/${course.id}`).status(201).end();
     } catch (error) {
       console.error(`Error: ${error.name}`);
-      if (error.name === "SequelizeValidationError") {
+      if (error.name === 'SequelizeValidationError') {
         const errors = error.errors.map((err) => err.message);
         res.status(400).json({ errors });
       } else {
@@ -104,7 +104,7 @@ router.post(
  *  - returns 204 HTTP status code and no content
  */
 router.put(
-  "/courses/:id",
+  '/courses/:id',
   authenticateUser,
   asyncHandler(async (req, res) => {
     const user = req.currentUser;
@@ -124,10 +124,10 @@ router.put(
           res.sendStatus(404);
         }
       } else {
-        res.sendStatus(403).json({ message: "Access denied" });
+        res.sendStatus(403).json({ message: 'Access denied' });
       }
     } catch (error) {
-      if (error.name === "SequelizeValidationError") {
+      if (error.name === 'SequelizeValidationError') {
         const errors = error.errors.map((err) => err.message);
         res.status(400).json({ errors });
       } else {
@@ -143,7 +143,7 @@ router.put(
  *  - returns 204 HTTP status code and no content
  */
 router.delete(
-  "/courses/:id",
+  '/courses/:id',
   authenticateUser,
   asyncHandler(async (req, res) => {
     const user = req.currentUser;

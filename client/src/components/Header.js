@@ -16,7 +16,7 @@ export default class Header extends React.PureComponent {
     // console.log(this.props);
     // store the authenticatedUser data in a variable
     const authUser = context.authenticatedUser;
-    console.log('Auth user = ', authUser);
+    // console.log('Auth user = ', authUser);
 
     // React.Fragment groups a list of children without adding extra nodes to the DOM
     // if there is an authenticated user stored in context, render a welcome message and a 'sign out' link

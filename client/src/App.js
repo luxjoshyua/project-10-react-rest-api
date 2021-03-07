@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import components
 import Header from './components/Header';
 import Courses from './components/Courses';
+import CourseDetail from './components/CourseDetail';
 import UserSignUp from './components/UserSignUp';
 import UserSignIn from './components/UserSignIn';
 import UserSignOut from './components/UserSignOut';
@@ -12,6 +13,7 @@ import withContext from './Context';
 
 // connect Header component to Context
 const HeaderWithContext = withContext(Header);
+const CourseDetailWithContext = withContext(CourseDetail);
 const UserSignUpWithContext = withContext(UserSignUp);
 const UserSignInWithContext = withContext(UserSignIn);
 const UserSignOutWithContext = withContext(UserSignOut);
@@ -50,11 +52,12 @@ const App = () => (
     <HeaderWithContext />
     <div>
       <Switch>
-        <Route exact path='/' component={Courses} />
-        <Route path='/courses' Redirect to='/' component={Courses} />
+        <Route path='/courses/:id' component={CourseDetailWithContext} />
         <Route path='/signin' component={UserSignInWithContext} />
         <Route path='/signup' component={UserSignUpWithContext} />
         <Route path='/signout' component={UserSignOutWithContext} />
+        <Route path='/courses' Redirect to='/' component={Courses} />
+        <Route exact path='/' component={Courses} />
       </Switch>
     </div>
   </Router>

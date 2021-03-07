@@ -165,7 +165,7 @@ q {
 /* line 165, ../sass/reset.sass */
 q:before,
 q:after {
-  content: "";
+  content: '';
   content: none;
 }
 
@@ -201,7 +201,7 @@ svg {
 
 /* line 5, ../sass/global.sass */
 body {
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   background: #fff;
 }
 
@@ -263,7 +263,7 @@ body {
 /* line 2, ../sass/mixins.sass */
 .actions--bar:before,
 .actions--bar:after {
-  content: " ";
+  content: ' ';
   display: table;
 }
 /* line 5, ../sass/mixins.sass */
@@ -295,7 +295,7 @@ a {
 
 /* line 66, ../sass/global.sass */
 p {
-  font-family: "Cousine";
+  font-family: 'Cousine';
   margin-bottom: 30px;
 }
 
@@ -356,7 +356,7 @@ p {
 /* line 2, ../sass/mixins.sass */
 .course--module:before,
 .course--module:after {
-  content: " ";
+  content: ' ';
   display: table;
 }
 /* line 5, ../sass/mixins.sass */
@@ -371,7 +371,7 @@ p {
 }
 /* line 116, ../sass/global.sass */
 .course--label {
-  font-family: "Cousine";
+  font-family: 'Cousine';
   font-size: 14px;
   font-weight: 100;
   color: rgba(255, 255, 255, 0.5);
@@ -452,7 +452,7 @@ p {
 .course--title--input {
   font-size: 48px;
   font-weight: bold;
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
 }
 /* line 186, ../sass/global.sass */
 .course--description {
@@ -481,12 +481,12 @@ p {
   border-top: 1px solid #ccc;
   font-size: 16px;
   line-height: 1.8;
-  font-family: "Cousine";
+  font-family: 'Cousine';
 }
 /* line 2, ../sass/mixins.sass */
 .course--description li:before,
 .course--description li:after {
-  content: " ";
+  content: ' ';
   display: table;
 }
 /* line 5, ../sass/mixins.sass */
@@ -508,7 +508,7 @@ p {
 }
 /* line 219, ../sass/global.sass */
 .course--description ul li:before {
-  content: "";
+  content: '';
   float: left;
   margin: 9px 0 0 -30px;
   width: 5px;
@@ -521,7 +521,7 @@ p {
 .course--description h1,
 .course--description h2,
 .course--description h3 {
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   color: #222;
   margin-bottom: 30px;
 }
@@ -547,7 +547,7 @@ p {
 }
 /* line 287, ../sass/global.sass */
 .course--stats--list h4 {
-  font-family: "Cousine";
+  font-family: 'Cousine';
   font-weight: 100;
   color: #999;
   font-size: 14px;
@@ -562,7 +562,7 @@ p {
 }
 /* line 300, ../sass/global.sass */
 .course--stats--list h3 {
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-size: 18px;
 }
 /* line 303, ../sass/global.sass */
@@ -580,7 +580,7 @@ p {
 }
 /* line 311, ../sass/global.sass */
 .course--time--input {
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-size: 18px;
   font-weight: bold;
   margin: 0;
@@ -605,7 +605,7 @@ textarea {
   color: #666;
   line-height: 1.8;
   outline: none;
-  font-family: "Cousine";
+  font-family: 'Cousine';
   box-sizing: border-box;
 }
 /* line 29, ../sass/mixins.sass */
@@ -687,7 +687,7 @@ input:focus {
 .button {
   background: #7c689b;
   color: #fff;
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   font-size: 18px;
   padding: 15px 30px;
   border: 0;

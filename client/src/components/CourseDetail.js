@@ -39,26 +39,51 @@ export default class CourseDetail extends Component {
       });
   }
 
-  componentDidUpdate(loadedProps) {
-    if (loadedProps.location.pathname !== this.props.location.pathname) {
-      axios
-        .get(`http://localhost:5000/api/${this.props.match.url}`)
-        .then((data) => {
-          this.setState({
-            course: data.data,
-            user: data.data.User,
-          });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }
+  // componentDidUpdate(loadedProps) {
+  //   if (loadedProps.location.pathname !== this.props.location.pathname) {
+  //     axios
+  //       .get(`http://localhost:5000/api/${this.props.match.url}`)
+  //       .then((data) => {
+  //         this.setState({
+  //           course: data.data,
+  //           user: data.data.User,
+  //         });
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   }
+  // }
 
   render() {
     const result = this.state.course;
-    console.log('here are my results = ', result);
-    console.log('here is my user = ', result.User);
+    // console.log('here are my results = ', result);
+    // console.log('here is my user = ', result.User);
+
+    // when user clicks "Delete Course" button,
+    // need to send a DELETE request to the REST API's /api/courses/:id route
+    // in order to delete a course.
+    const deleteCourse = (e) => {
+      e.preventDefault();
+      console.log('func called!');
+      const requestOptions = {
+        method: 'DELETE',
+        headers: {
+          Authorization: 'Basic ',
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+        },
+      };
+      fetch(`http://localhost:5000/api${this.props.match.url}`, requestOptions)
+        .then((response) => {
+          return response.json();
+        })
+        .then((result) => {
+          // do what you want with the response here
+          console.log('what is my result? = ', result);
+        });
+    };
+
     return (
       <div>
         <div className='actions--bar'>
@@ -69,7 +94,7 @@ export default class CourseDetail extends Component {
                   Update Course
                 </Link>
                 {/* sends a delete request to /api/courses/:id route */}
-                <Link className='button' to={`/`}>
+                <Link className='button' onClick={deleteCourse} to={`/`}>
                   Delete Course
                 </Link>
               </span>

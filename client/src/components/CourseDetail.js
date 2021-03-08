@@ -21,67 +21,45 @@ export default class CourseDetail extends Component {
   };
 
   // component first mounts (or on reload), make axios call to API to retrieve the individual course in the database
-  componentDidMount() {
-    axios
-      .get(`http://localhost:5000/api/${this.props.match.url}`)
-      .then((data) => {
-        // console.log('data looks like = ', data);
-        this.setState({
-          course: data.data,
-          user: data.data.User,
-        });
-        // console.log(this.state.course);
-      })
-      .catch((error) => {
-        console.log('Error fetching and parsing data', error);
-        // push onto error stack
-        this.props.history.push('/error');
+  // useful: https://www.robinwieruch.de/react-fetching-data
+  async componentDidMount() {
+    this.setState({ isLoading: true });
+    try {
+      const data = await axios.get(
+        `http://localhost:5000/api/${this.props.match.url}`
+      );
+      this.setState({
+        course: data.data,
+        user: data.data.User,
       });
+    } catch (error) {
+      console.log('Error fetching and parsing data', error);
+      // push onto error stack
+      this.props.history.push('/error');
+    }
   }
-
-  // componentDidUpdate(loadedProps) {
-  //   if (loadedProps.location.pathname !== this.props.location.pathname) {
-  //     axios
-  //       .get(`http://localhost:5000/api/${this.props.match.url}`)
-  //       .then((data) => {
-  //         this.setState({
-  //           course: data.data,
-  //           user: data.data.User,
-  //         });
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   }
-  // }
 
   render() {
     const result = this.state.course;
-    // console.log('here are my results = ', result);
-    // console.log('here is my user = ', result.User);
+
+    const { context } = this.props;
+    const authUser = context.authenticatedUser;
+    console.log('here is authUser = ', authUser);
+    // console.log('here is user in state = ', user);
 
     // when user clicks "Delete Course" button,
     // need to send a DELETE request to the REST API's /api/courses/:id route
     // in order to delete a course.
-    const deleteCourse = (e) => {
+
+    // if the results id = the user id, you want to allow delete, but how to persist
+    // that in state instead of every time it loads, because it throws undefined on initial load
+
+    // how to authenticate so it doesn't throw a 401?
+    const deleteCourse = async (e) => {
       e.preventDefault();
-      console.log('func called!');
-      const requestOptions = {
-        method: 'DELETE',
-        headers: {
-          Authorization: 'Basic ',
-          Accept: 'application/json, text/plain, */*',
-          'Content-Type': 'application/json',
-        },
-      };
-      fetch(`http://localhost:5000/api${this.props.match.url}`, requestOptions)
-        .then((response) => {
-          return response.json();
-        })
-        .then((result) => {
-          // do what you want with the response here
-          console.log('what is my result? = ', result);
-        });
+      // console.log('func called!');
+      await axios.delete(`http://localhost:5000/api${this.props.match.url}`);
+      history.push('/');
     };
 
     return (
@@ -109,7 +87,7 @@ export default class CourseDetail extends Component {
             <div className='course--header'>
               <h4 className='course--label'>Course</h4>
               <h3 className='course--title'>{result.title}</h3>
-              <p>current user logged in goes here</p>
+              <p>{result.title}</p>
             </div>
             <div className='course--description'>
               <ReactMarkdown children={result.description} />

@@ -55,8 +55,6 @@ export default class Data {
     }
   }
 
-  // posts the request successfully, but the GET returns a 401
-
   // makes POST request to the API to create new user
   async createUser(user) {
     const response = await this.api('/users', 'POST', user);

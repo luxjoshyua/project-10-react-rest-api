@@ -80,7 +80,7 @@ export default class UserSignIn extends Component {
     context.actions
       .signIn(emailAddress, password)
       .then((user) => {
-        console.log('what does user equal here? = ', user);
+        console.log('user equals = ', user);
         // user isn't found
         if (user === null) {
           this.setState(() => {

@@ -16,36 +16,16 @@ export default class CourseDetail extends Component {
   state = {
     // populate array with fetched data
     course: [],
-    author: [],
+    user: [],
     errors: [],
   };
 
-  // component first mounts (or on reload), make axios call to API to retrieve the individual course in the database
-  // useful: https://www.robinwieruch.de/react-fetching-data
-  async componentDidMount() {
-    this.setState({ isLoading: true });
-    try {
-      const data = await axios.get(
-        `http://localhost:5000/api/${this.props.match.url}`
-      );
-      this.setState({
-        course: data.data,
-        author: data.data.User,
-      });
-    } catch (error) {
-      console.log('Error fetching and parsing data', error);
-      // push onto error stack
-      this.props.history.push('/error');
-    }
-  }
-
   deleteCourse = () => {
     const { context } = this.props;
+    console.log(context);
     const authUser = context.authenticatedUser;
     const authUserEmail = authUser.emailAddress;
     const authUserPassword = authUser.password;
-    const { title } = this.state;
-    console.log(title);
     const id = this.props.match.params.id;
 
     context.data
@@ -54,7 +34,7 @@ export default class CourseDetail extends Component {
         if (errors) {
           this.setState({ errors });
           return {
-            errors: [`Course ${title} was not deleted from the database.`],
+            errors: [`Course was not deleted from the database.`],
           };
         } else {
           this.props.history.push('/');
@@ -67,10 +47,28 @@ export default class CourseDetail extends Component {
       });
   };
 
+  // component first mounts (or on reload), make axios call to API to retrieve the individual course in the database
+  // useful: https://www.robinwieruch.de/react-fetching-data
+  componentDidMount() {
+    axios
+      .get(`http://localhost:5000/api/${this.props.match.url}`)
+      .then((data) => {
+        this.setState({
+          course: data.data,
+          user: data.data.User,
+        });
+      })
+      .catch((error) => {
+        console.log('Error fetching and parsing data', error);
+        // push onto error stack
+        this.props.history.push('/error');
+      });
+  }
+
   render() {
     const { context } = this.props;
     const result = this.state.course;
-    const { course, author } = this.state;
+    const { course, user } = this.state;
     const authUser = context.authenticatedUser;
 
     return (
@@ -79,7 +77,7 @@ export default class CourseDetail extends Component {
           <div className='bounds'>
             <div className='grid-100'>
               <span>
-                {authUser && authUser.emailAddress === author.emailAddress ? (
+                {authUser && authUser.emailAddress === user.emailAddress ? (
                   <React.Fragment>
                     <Link
                       className='button'
@@ -110,7 +108,7 @@ export default class CourseDetail extends Component {
             <div className='course--header'>
               <h4 className='course--label'>Course</h4>
               <h3 className='course--title'>{result.title}</h3>
-              <p>{author.firstName}</p>
+              <p>{user.firstName}</p>
             </div>
             <div className='course--description'>
               <ReactMarkdown children={result.description} />

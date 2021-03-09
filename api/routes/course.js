@@ -147,20 +147,34 @@ router.delete(
   '/courses/:id',
   authenticateUser,
   asyncHandler(async (req, res) => {
-    const user = req.currentUser;
-    const course = await Course.findByPk(req.params.id, {
-      include: User,
-    });
-
-    if (user.emailAddress === course.User.emailAddress) {
-      if (course) {
-        await course.destroy();
-        res.sendStatus(204);
+    try {
+      const user = req.currentUser;
+      const course = await Course.findByPk(req.params.id, {
+        include: {
+          model: User,
+          attributes: [
+            'id',
+            'firstName',
+            'lastName',
+            'emailAddress',
+            'password',
+          ],
+        },
+      });
+      console.log('what is user = ', user);
+      console.log('what is course = ', course);
+      if (user.emailAddress === course.User.emailAddress) {
+        if (course) {
+          await course.destroy();
+          res.sendStatus(204);
+        } else {
+          res.sendStatus(404);
+        }
       } else {
-        res.sendStatus(404);
+        res.sendStatus(403);
       }
-    } else {
-      res.sendStatus(403);
+    } catch (error) {
+      console.log('Error: ', error.name);
     }
   })
 );

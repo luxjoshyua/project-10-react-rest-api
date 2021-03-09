@@ -24,14 +24,12 @@ export default class Data {
     /* check if auth is required - are we making a request to a protected route on the server
       if yes, encode user credentials and set HTTP Authorization request header to Basic authentication type,
       followed by encoded user credentials
-      */
-
+    */
     if (requiresAuth) {
       // btoa() creates base-64 encoded string
       const encodedCredentials = btoa(
         `${credentials.emailAddress}:${credentials.password}`
       );
-
       // hold the credentials to authenticate the client with the server
       // encodedCredentials is a series of letters and numbers
       options.headers['Authorization'] = `Basic ${encodedCredentials}`;
@@ -75,6 +73,23 @@ export default class Data {
   //  use emailAddress and password for deleteCourse
   // send delete request to to /api/courses/:id route
   async deleteCourse(id, emailAddress, password) {
-    console.log('do something');
+    const response = await this.api(`/courses/${id}`, 'DELETE', null, true, {
+      emailAddress,
+      password,
+    });
+    console.log('here is the response sent = ', response);
+    if (response.status === 201) {
+      console.log(`course successfully deleted by ${emailAddress}`);
+      return [];
+    } else if (response.status === 400) {
+      return response.json().then((data) => {
+        return data.errors;
+      });
+    } else if (response.status === 500) {
+      this.props.history.push('/error');
+    } else {
+      // FIXME: ======= REACHES THIS ERROR =======
+      throw new Error();
+    }
   }
 }

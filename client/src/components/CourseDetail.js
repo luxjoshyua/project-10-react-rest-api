@@ -39,22 +39,39 @@ export default class CourseDetail extends Component {
     }
   }
 
-  render() {
-    const result = this.state.course;
-    const { course, author } = this.state;
-    console.log('what is course = ', course);
+  deleteCourse = () => {
     const { context } = this.props;
     const authUser = context.authenticatedUser;
-    if (authUser) {
-      console.log('here is authUser email address = ', authUser.emailAddress);
-    }
+    const authUserEmail = authUser.emailAddress;
+    const authUserPassword = authUser.password;
+    const { title } = this.state;
+    console.log(title);
+    const id = this.props.match.params.id;
 
-    const deleteCourse = async (e) => {
-      e.preventDefault();
-      console.log('func called!');
-      // await axios.delete(`http://localhost:5000/api/${this.props.match.url}`);
-      // history.push('/');
-    };
+    context.data
+      .deleteCourse(id, authUserEmail, authUserPassword)
+      .then((errors) => {
+        if (errors) {
+          this.setState({ errors });
+          return {
+            errors: [`Course ${title} was not deleted from the database.`],
+          };
+        } else {
+          this.props.history.push('/');
+          console.log('Course was successfully deleted from the database.');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        this.props.history.push('/error');
+      });
+  };
+
+  render() {
+    const { context } = this.props;
+    const result = this.state.course;
+    const { course, author } = this.state;
+    const authUser = context.authenticatedUser;
 
     return (
       <div>
@@ -70,7 +87,11 @@ export default class CourseDetail extends Component {
                     >
                       Update Course
                     </Link>
-                    <Link className='button' onClick={deleteCourse} to={`/`}>
+                    <Link
+                      className='button'
+                      onClick={this.deleteCourse}
+                      to={`/`}
+                    >
                       Delete Course
                     </Link>
                   </React.Fragment>
@@ -89,7 +110,7 @@ export default class CourseDetail extends Component {
             <div className='course--header'>
               <h4 className='course--label'>Course</h4>
               <h3 className='course--title'>{result.title}</h3>
-              <p>{result.title}</p>
+              <p>{author.firstName}</p>
             </div>
             <div className='course--description'>
               <ReactMarkdown children={result.description} />

@@ -71,4 +71,10 @@ export default class Data {
       throw new Error();
     }
   }
+
+  //  use emailAddress and password for deleteCourse
+  // send delete request to to /api/courses/:id route
+  async deleteCourse(id, emailAddress, password) {
+    console.log('do something');
+  }
 }

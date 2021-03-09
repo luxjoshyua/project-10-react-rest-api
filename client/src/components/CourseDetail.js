@@ -16,7 +16,7 @@ export default class CourseDetail extends Component {
   state = {
     // populate array with fetched data
     course: [],
-    user: [],
+    author: [],
     errors: [],
   };
 
@@ -30,7 +30,7 @@ export default class CourseDetail extends Component {
       );
       this.setState({
         course: data.data,
-        user: data.data.User,
+        author: data.data.User,
       });
     } catch (error) {
       console.log('Error fetching and parsing data', error);
@@ -41,25 +41,19 @@ export default class CourseDetail extends Component {
 
   render() {
     const result = this.state.course;
-
+    const { course, author } = this.state;
+    console.log('what is course = ', course);
     const { context } = this.props;
     const authUser = context.authenticatedUser;
-    console.log('here is authUser = ', authUser);
-    // console.log('here is user in state = ', user);
+    if (authUser) {
+      console.log('here is authUser email address = ', authUser.emailAddress);
+    }
 
-    // when user clicks "Delete Course" button,
-    // need to send a DELETE request to the REST API's /api/courses/:id route
-    // in order to delete a course.
-
-    // if the results id = the user id, you want to allow delete, but how to persist
-    // that in state instead of every time it loads, because it throws undefined on initial load
-
-    // how to authenticate so it doesn't throw a 401?
     const deleteCourse = async (e) => {
       e.preventDefault();
-      // console.log('func called!');
-      await axios.delete(`http://localhost:5000/api${this.props.match.url}`);
-      history.push('/');
+      console.log('func called!');
+      // await axios.delete(`http://localhost:5000/api/${this.props.match.url}`);
+      // history.push('/');
     };
 
     return (
@@ -68,13 +62,21 @@ export default class CourseDetail extends Component {
           <div className='bounds'>
             <div className='grid-100'>
               <span>
-                <Link className='button' to={`/courses/${result.id}/update`}>
-                  Update Course
-                </Link>
-                {/* sends a delete request to /api/courses/:id route */}
-                <Link className='button' onClick={deleteCourse} to={`/`}>
-                  Delete Course
-                </Link>
+                {authUser && authUser.emailAddress === author.emailAddress ? (
+                  <React.Fragment>
+                    <Link
+                      className='button'
+                      to={`/courses/${result.id}/update`}
+                    >
+                      Update Course
+                    </Link>
+                    <Link className='button' onClick={deleteCourse} to={`/`}>
+                      Delete Course
+                    </Link>
+                  </React.Fragment>
+                ) : (
+                  <React.Fragment />
+                )}
               </span>
               <Link className='button button-secondary' to={`/`}>
                 Return to List

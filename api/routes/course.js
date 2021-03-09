@@ -50,6 +50,7 @@ router.get(
       const course = await Course.findByPk(req.params.id, {
         attributes: [
           'id',
+          'userId',
           'title',
           'description',
           'estimatedTime',

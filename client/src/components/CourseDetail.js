@@ -22,8 +22,9 @@ export default class CourseDetail extends Component {
 
   deleteCourse = () => {
     const { context } = this.props;
-    console.log(context);
+    console.log(context); // context is the authenticated user
     const authUser = context.authenticatedUser;
+    console.log('what is auth user here = ', authUser);
     const authUserEmail = authUser.emailAddress;
     const authUserPassword = authUser.password;
     const id = this.props.match.params.id;

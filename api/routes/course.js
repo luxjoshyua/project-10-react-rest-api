@@ -149,21 +149,11 @@ router.delete(
   asyncHandler(async (req, res) => {
     try {
       const user = req.currentUser;
-      const course = await Course.findByPk(req.params.id, {
-        include: {
-          model: User,
-          attributes: [
-            'id',
-            'firstName',
-            'lastName',
-            'emailAddress',
-            'password',
-          ],
-        },
-      });
+      const course = await Course.findByPk(req.params.id);
       console.log('what is user = ', user);
       console.log('what is course = ', course);
-      if (user.emailAddress === course.User.emailAddress) {
+      if (user.id === course.id) {
+        console.log('we have a match!');
         if (course) {
           await course.destroy();
           res.sendStatus(204);
@@ -173,6 +163,16 @@ router.delete(
       } else {
         res.sendStatus(403);
       }
+      // if (user.emailAddress === course.User.emailAddress) {
+      //   if (course) {
+      //     await course.destroy();
+      //     res.sendStatus(204);
+      //   } else {
+      //     res.sendStatus(404);
+      //   }
+      // } else {
+      //   res.sendStatus(403);
+      // }
     } catch (error) {
       console.log('Error: ', error.name);
     }

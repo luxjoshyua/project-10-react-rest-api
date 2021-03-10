@@ -70,7 +70,6 @@ export default class Data {
     }
   }
 
-  //  use emailAddress and password for deleteCourse
   // send delete request to to /api/courses/:id route
   async deleteCourse(id, emailAddress, password) {
     const response = await this.api(`/courses/${id}`, 'DELETE', null, true, {
@@ -78,7 +77,7 @@ export default class Data {
       password,
     });
     console.log('here is the response sent = ', response);
-    if (response.status === 201) {
+    if (response.status === 204) {
       console.log(`course successfully deleted by ${emailAddress}`);
       return [];
     } else if (response.status === 400) {

@@ -11,9 +11,10 @@ import axios from 'axios';
  *  - renders "Delete Course" button that sends DELETE request to /api/courses/:id route
  *  - renders "Update Course" button to navigate to "Update Course" screen
  */
-
 export default class CourseDetail extends Component {
+  _isMounted = false;
   state = {
+    isLoading: true,
     // populate array with fetched data
     course: [],
     user: [],
@@ -21,10 +22,9 @@ export default class CourseDetail extends Component {
   };
 
   deleteCourse = () => {
+    // context is the authenticated user
     const { context } = this.props;
-    console.log(context); // context is the authenticated user
     const authUser = context.authenticatedUser;
-    console.log('what is auth user here = ', authUser);
     const authUserEmail = authUser.emailAddress;
     const authUserPassword = authUser.password;
     const id = this.props.match.params.id;
@@ -51,13 +51,16 @@ export default class CourseDetail extends Component {
   // component first mounts (or on reload), make axios call to API to retrieve the individual course in the database
   // useful: https://www.robinwieruch.de/react-fetching-data
   componentDidMount() {
+    this._isMounted = true;
     axios
-      .get(`http://localhost:5000/api/${this.props.match.url}`)
+      .get(`http://localhost:5000/api${this.props.match.url}`)
       .then((data) => {
-        this.setState({
-          course: data.data,
-          user: data.data.User,
-        });
+        if (this._isMounted) {
+          this.setState({
+            course: data.data,
+            user: data.data.User,
+          });
+        }
       })
       .catch((error) => {
         console.log('Error fetching and parsing data', error);
@@ -69,7 +72,7 @@ export default class CourseDetail extends Component {
   render() {
     const { context } = this.props;
     const result = this.state.course;
-    const { course, user } = this.state;
+    const { user } = this.state;
     const authUser = context.authenticatedUser;
 
     return (

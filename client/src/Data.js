@@ -76,7 +76,6 @@ export default class Data {
       emailAddress,
       password,
     });
-    console.log('here is the response sent = ', response);
     if (response.status === 204) {
       console.log(`course successfully deleted by ${emailAddress}`);
       return [];
@@ -87,7 +86,6 @@ export default class Data {
     } else if (response.status === 500) {
       this.props.history.push('/error');
     } else {
-      // FIXME: ======= REACHES THIS ERROR =======
       throw new Error();
     }
   }

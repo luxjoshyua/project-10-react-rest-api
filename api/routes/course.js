@@ -61,7 +61,6 @@ router.get(
           attributes: ['id', 'firstName', 'lastName', 'emailAddress'],
         },
       });
-
       if (course) {
         res.status(200).json(course);
       } else {
@@ -150,29 +149,17 @@ router.delete(
     try {
       const user = req.currentUser;
       const course = await Course.findByPk(req.params.id);
-      console.log('what is user = ', user);
-      console.log('what is course = ', course);
-      if (user.id === course.id) {
-        console.log('we have a match!');
-        if (course) {
-          await course.destroy();
-          res.sendStatus(204);
-        } else {
-          res.sendStatus(404);
-        }
+      // console.log('what is user = ', user);
+      // console.log('what is course = ', course);
+      if (user.id === course.userId) {
+        console.log('here is user id = ', user.id);
+        console.log('here is course user id = ', course.userId);
+        await course.destroy();
+        res.status(204).end();
       } else {
-        res.sendStatus(403);
+        console.log(`User is not authorised to delete ${course.title}`);
+        res.status(403).end();
       }
-      // if (user.emailAddress === course.User.emailAddress) {
-      //   if (course) {
-      //     await course.destroy();
-      //     res.sendStatus(204);
-      //   } else {
-      //     res.sendStatus(404);
-      //   }
-      // } else {
-      //   res.sendStatus(403);
-      // }
     } catch (error) {
       console.log('Error: ', error.name);
     }

@@ -77,6 +77,7 @@ export default class Data {
       password,
     });
     if (response.status === 204) {
+      // reaches here, logs out
       console.log(`course successfully deleted by ${emailAddress}`);
       return [];
     } else if (response.status === 400) {

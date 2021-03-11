@@ -152,8 +152,8 @@ router.delete(
       // console.log('what is user = ', user);
       // console.log('what is course = ', course);
       if (user.id === course.userId) {
-        console.log('here is user id = ', user.id);
-        console.log('here is course user id = ', course.userId);
+        // console.log('here is user id = ', user.id);
+        // console.log('here is course user id = ', course.userId);
         await course.destroy();
         res.status(204).end();
       } else {

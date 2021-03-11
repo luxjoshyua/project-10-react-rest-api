@@ -69,6 +69,10 @@ export default class CourseDetail extends Component {
       });
   }
 
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   render() {
     const { context } = this.props;
     const result = this.state.course;

@@ -10,7 +10,6 @@ const { sequelize } = require('./models');
 // import the routes
 const usersRoutes = require('./routes/user');
 const coursesRoutes = require('./routes/course');
-// const routes = require("./routes");
 
 // variable to enable global error logging
 const enableGlobalErrorLogging =

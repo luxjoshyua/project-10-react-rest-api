@@ -70,6 +70,27 @@ export default class Data {
     }
   }
 
+  // makes post request to create new course
+  async createCourse(course, emailAddress, password) {
+    const response = await this.api('/courses', 'POST', course, true, {
+      emailAddress,
+      password,
+    });
+    console.log('here is the response from create course = ', response);
+    if (response.status === 201) {
+      console.log('course successfully created');
+      return [];
+    } else if (response.status === 400) {
+      return response.json().then((data) => {
+        return data.errors;
+      });
+    } else if (response.status === 500) {
+      this.props.history.push('/error');
+    } else {
+      throw new Error();
+    }
+  }
+
   // send delete request to to /api/courses/:id route
   async deleteCourse(id, emailAddress, password) {
     const response = await this.api(`/courses/${id}`, 'DELETE', null, true, {
@@ -80,6 +101,28 @@ export default class Data {
       // reaches here, logs out
       console.log(`course successfully deleted by ${emailAddress}`);
       return [];
+    } else if (response.status === 400) {
+      return response.json().then((data) => {
+        return data.errors;
+      });
+    } else if (response.status === 500) {
+      this.props.history.push('/error');
+    } else {
+      throw new Error();
+    }
+  }
+
+  // updateCourse goes here
+
+  async getCourse(id, emailAddress, password) {
+    const response = await this.api(`courses/${id}`, 'GET', null, true, {
+      emailAddress,
+      password,
+    });
+    console.log('here is the response sent from get course = ', response);
+    if (response.status === 200) {
+      console.log('Course was successfully fetched!');
+      return response.json().then((data) => data);
     } else if (response.status === 400) {
       return response.json().then((data) => {
         return data.errors;

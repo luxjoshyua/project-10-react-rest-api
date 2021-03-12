@@ -12,15 +12,15 @@ import axios from 'axios';
  *  - renders "Update Course" button to navigate to "Update Course" screen
  */
 export default class CourseDetail extends Component {
-  _isMounted = false;
   state = {
-    isLoading: true,
     // populate array with fetched data
     course: [],
     user: [],
     errors: [],
   };
 
+  // Need to be able to create a course before worrying about deleting it
+  /*
   deleteCourse = () => {
     // context is the authenticated user
     const { context } = this.props;
@@ -47,30 +47,29 @@ export default class CourseDetail extends Component {
         this.props.history.push('/error');
       });
   };
+  */
+
+  deleteCourse = () => {
+    console.log('func called');
+  };
 
   // component first mounts (or on reload), make axios call to API to retrieve the individual course in the database
   // useful: https://www.robinwieruch.de/react-fetching-data
   componentDidMount() {
-    this._isMounted = true;
     axios
       .get(`http://localhost:5000/api${this.props.match.url}`)
       .then((data) => {
-        if (this._isMounted) {
-          this.setState({
-            course: data.data,
-            user: data.data.User,
-          });
-        }
+        this.setState({
+          course: data.data,
+          user: data.data.User,
+        });
+        console.log('what is data after being set = ', data); // all working
       })
       .catch((error) => {
         console.log('Error fetching and parsing data', error);
         // push onto error stack
         this.props.history.push('/error');
       });
-  }
-
-  componentWillUnmount() {
-    this._isMounted = false;
   }
 
   render() {

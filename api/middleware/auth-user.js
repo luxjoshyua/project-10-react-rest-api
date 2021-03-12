@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-const auth = require("basic-auth");
-const bcrypt = require("bcryptjs");
-const { User } = require("../models");
+const auth = require('basic-auth');
+const bcrypt = require('bcryptjs');
+const { User } = require('../models');
 
 /**
  * Middleware to authenticate the request using Basic Authentication.
@@ -29,18 +29,18 @@ exports.authenticateUser = async (req, res, next) => {
         // Store the user on the Request object.
         req.currentUser = user;
       } else {
-        message = "Authentication failure";
+        message = 'Authentication failure';
       }
     } else {
-      message = "User not found";
+      message = 'User not found';
     }
   } else {
-    message = "Auth header not found";
+    message = 'Auth header not found';
   }
 
   if (message) {
     console.warn(message);
-    res.status(401).json({ message: "Access Denied" });
+    res.status(401).json({ message: 'Access Denied' });
   } else {
     next();
   }

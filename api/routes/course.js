@@ -85,6 +85,8 @@ router.post(
     try {
       // post new course
       const course = await Course.create(req.body);
+      console.log(`Course: ${req.body.title} successfully created`);
+      // sets location header to new course id
       res.location(`/courses/${course.id}`).status(201).end();
     } catch (error) {
       console.error(`Error: ${error.name}`);
@@ -108,7 +110,6 @@ router.put(
   authenticateUser,
   asyncHandler(async (req, res) => {
     const user = req.currentUser;
-
     try {
       const course = await Course.findByPk(req.params.id, {
         include: {
@@ -149,11 +150,7 @@ router.delete(
     try {
       const user = req.currentUser;
       const course = await Course.findByPk(req.params.id);
-      // console.log('what is user = ', user);
-      // console.log('what is course = ', course);
       if (user.id === course.userId) {
-        // console.log('here is user id = ', user.id);
-        // console.log('here is course user id = ', course.userId);
         await course.destroy();
         res.status(204).end();
       } else {

@@ -10,10 +10,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 export default class CreateCourse extends Component {
+  state = {};
+
   render() {
+    const { context } = this.props;
+    const authUser = context.authenticatedUser;
     return (
       <div>
-        <h1>Create Course Component!</h1>
+        <h1>Create Course Component</h1>
       </div>
     );
   }

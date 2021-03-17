@@ -49,9 +49,9 @@ export default class CourseDetail extends Component {
   };
   */
 
-  deleteCourse = () => {
-    console.log('func called');
-  };
+  // deleteCourse = () => {
+  //   console.log('func called');
+  // };
 
   // component first mounts (or on reload), make axios call to API to retrieve the individual course in the database
   // useful: https://www.robinwieruch.de/react-fetching-data
@@ -63,7 +63,7 @@ export default class CourseDetail extends Component {
           course: data.data,
           user: data.data.User,
         });
-        console.log('what is data after being set = ', data); // all working
+        console.log('what is data after being set = ', data);
       })
       .catch((error) => {
         console.log('Error fetching and parsing data', error);

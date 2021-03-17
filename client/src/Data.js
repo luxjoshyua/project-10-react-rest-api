@@ -115,7 +115,7 @@ export default class Data {
   // updateCourse goes here
 
   async getCourse(id, emailAddress, password) {
-    const response = await this.api(`courses/${id}`, 'GET', null, true, {
+    const response = await this.api(`/courses/${id}`, 'GET', null, true, {
       emailAddress,
       password,
     });

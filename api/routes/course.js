@@ -77,6 +77,7 @@ router.get(
  *  - creates new course
  *  - sets Location header to the URI for the newly created course
  *  - returns 201 HTTP status code and no content
+ *  - IS WORKING IN POSTMAN
  */
 router.post(
   '/courses',

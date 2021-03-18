@@ -9,6 +9,7 @@ export default class Data {
     credentials = null
   ) {
     const url = config.apiBaseUrl + path;
+    console.log('what is the url = ', url);
 
     const options = {
       method,
@@ -16,6 +17,8 @@ export default class Data {
         'Content-Type': 'application/json; charset=utf-8',
       },
     };
+
+    console.log('what are my options = ', options);
 
     if (body !== null) {
       options.body = JSON.stringify(body);
@@ -90,6 +93,12 @@ export default class Data {
     }
   }
 
+  // updateCourse goes here
+
+  async updateCourse(arg1, arg2) {
+    console.log('update course being called');
+  }
+
   // send delete request to to /api/courses/:id route
   async deleteCourse(id, emailAddress, password) {
     const response = await this.api(`/courses/${id}`, 'DELETE', null, true, {
@@ -97,9 +106,7 @@ export default class Data {
       password,
     });
     if (response.status === 204) {
-      // reaches here, logs out
       console.log(`course successfully deleted by ${emailAddress}`);
-      return [];
     } else if (response.status === 400) {
       return response.json().then((data) => {
         return data.errors;
@@ -110,8 +117,6 @@ export default class Data {
       throw new Error();
     }
   }
-
-  // updateCourse goes here
 
   async getCourse(id, emailAddress, password) {
     const response = await this.api(`/courses/${id}`, 'GET', null, true, {

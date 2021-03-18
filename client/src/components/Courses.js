@@ -54,6 +54,7 @@ export default class Courses extends Component {
   // then populate the DOM with the fetched data
   render() {
     const results = this.state.courses;
+    console.log('here are my current courses in state = ', results);
 
     let courses = results.map((course) => (
       <React.Fragment key={course.id}>

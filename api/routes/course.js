@@ -77,7 +77,6 @@ router.get(
  *  - creates new course
  *  - sets Location header to the URI for the newly created course
  *  - returns 201 HTTP status code and no content
- *  - IS WORKING IN POSTMAN
  */
 router.post(
   '/courses',
@@ -153,7 +152,7 @@ router.delete(
       const course = await Course.findByPk(req.params.id);
       if (user.id === course.userId) {
         await course.destroy();
-        res.status(204).end();
+        res.status(204).send({}).end();
       } else {
         console.log(`User is not authorised to delete ${course.title}`);
         res.status(403).end();

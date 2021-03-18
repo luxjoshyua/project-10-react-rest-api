@@ -19,8 +19,24 @@ export default class CourseDetail extends Component {
     errors: [],
   };
 
-  // Need to be able to create a course before worrying about deleting it
-  /*
+  // component first mounts (or on reload), make axios call to API to retrieve the individual course in the database
+  // useful: https://www.robinwieruch.de/react-fetching-data
+  componentDidMount() {
+    axios
+      .get(`http://localhost:5000/api${this.props.match.url}`)
+      .then((data) => {
+        this.setState({
+          course: data.data,
+          user: data.data.User,
+        });
+      })
+      .catch((error) => {
+        console.log('Error fetching and parsing data', error);
+        // push onto error stack
+        this.props.history.push('/error');
+      });
+  }
+
   deleteCourse = () => {
     // context is the authenticated user
     const { context } = this.props;
@@ -47,29 +63,6 @@ export default class CourseDetail extends Component {
         this.props.history.push('/error');
       });
   };
-  */
-
-  // deleteCourse = () => {
-  //   console.log('func called');
-  // };
-
-  // component first mounts (or on reload), make axios call to API to retrieve the individual course in the database
-  // useful: https://www.robinwieruch.de/react-fetching-data
-  componentDidMount() {
-    axios
-      .get(`http://localhost:5000/api${this.props.match.url}`)
-      .then((data) => {
-        this.setState({
-          course: data.data,
-          user: data.data.User,
-        });
-      })
-      .catch((error) => {
-        console.log('Error fetching and parsing data', error);
-        // push onto error stack
-        this.props.history.push('/error');
-      });
-  }
 
   render() {
     const { context } = this.props;

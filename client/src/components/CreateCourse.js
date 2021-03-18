@@ -56,6 +56,7 @@ export default class CreateCourse extends Component {
                       onChange={this.change}
                     />
                   </div>
+                  {/* REMOVE THIS ternary once private route implemented */}
                   <p>
                     By
                     {authUser !== null
@@ -130,31 +131,40 @@ export default class CreateCourse extends Component {
   submit = () => {
     // context is my authenticatedUser
     const { context } = this.props;
-    console.log('what is context here = ', context);
-    const { title, description, estimatedTime, materialsNeeded } = this.state; // saves all entered data
-    console.log('what is state here = ', this.state);
     const authUser = context.authenticatedUser;
     const authUserEmail = authUser.emailAddress;
     const authUserPassword = authUser.password;
-    console.log(
-      'check my variables are correct = ',
-      authUser,
-      authUserEmail,
-      authUserPassword
-    );
+    const userId = authUser.id;
+    const { title, description, estimatedTime, materialsNeeded } = this.state; // saves all entered data
+    const course = {
+      title,
+      description,
+      estimatedTime,
+      materialsNeeded,
+      userId,
+    };
 
     // access the createCourse API call in Data.js
-    // context.data
-    //   .createCourse(course, authUserEmail, authUserPassword)
-    //   .then((errors) => {
-    //     if (errors.length) {
-    //       this.setState(() => {
-    //         return {
-    //           errors: ['Course creation was unsuccessful'],
-    //         };
-    //       });
-    //     }
-    //   });
+    context.data
+      .createCourse(course, authUserEmail, authUserPassword)
+      .then((errors) => {
+        if (errors.length) {
+          this.setState(() => {
+            return {
+              errors: ['Course creation was unsuccessful'],
+            };
+          });
+        } else {
+          this.props.history.push('/');
+          console.log(
+            `Course ${title} has been successfully created by ${authUser.firstName} ${authUser.lastName}`
+          );
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        this.props.history.push('/error');
+      });
   };
 
   cancel = () => {

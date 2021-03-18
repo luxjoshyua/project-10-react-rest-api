@@ -76,7 +76,6 @@ export default class Data {
       emailAddress,
       password,
     });
-    console.log('here is the response from create course = ', response);
     if (response.status === 201) {
       console.log('course successfully created');
       return [];

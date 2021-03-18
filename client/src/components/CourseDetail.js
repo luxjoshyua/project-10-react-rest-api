@@ -63,7 +63,6 @@ export default class CourseDetail extends Component {
           course: data.data,
           user: data.data.User,
         });
-        console.log('what is data after being set = ', data);
       })
       .catch((error) => {
         console.log('Error fetching and parsing data', error);

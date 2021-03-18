@@ -15,12 +15,12 @@ import withContext from './Context';
 
 // connect Header component to Context
 const HeaderWithContext = withContext(Header);
-const CourseDetailWithContext = withContext(CourseDetail);
-const UpdateCourseWithContext = withContext(UpdateCourse);
-const CreateCourseWithContext = withContext(CreateCourse);
 const UserSignUpWithContext = withContext(UserSignUp);
 const UserSignInWithContext = withContext(UserSignIn);
 const UserSignOutWithContext = withContext(UserSignOut);
+const CourseDetailWithContext = withContext(CourseDetail);
+const UpdateCourseWithContext = withContext(UpdateCourse);
+const CreateCourseWithContext = withContext(CreateCourse);
 
 /**
  * App Component

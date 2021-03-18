@@ -56,9 +56,13 @@ export default class CreateCourse extends Component {
                       onChange={this.change}
                     />
                   </div>
-                  <p>By </p>
+                  <p>
+                    By
+                    {authUser !== null
+                      ? authUser.firstName + ' ' + authUser.lastName
+                      : ' no authUser in state'}
+                  </p>
                 </div>
-
                 <div className='course--description'>
                   <div>
                     <textarea
@@ -83,7 +87,8 @@ export default class CreateCourse extends Component {
                           type='text'
                           className='course--time--input'
                           placeholder='Hours'
-                          // value=''
+                          value={estimatedTime}
+                          onChange={this.change}
                         />
                       </div>
                     </li>
@@ -94,6 +99,8 @@ export default class CreateCourse extends Component {
                           id='materialsNeeded'
                           name='materialsNeeded'
                           placeholder='List materials...'
+                          value={materialsNeeded}
+                          onChange={this.change}
                         ></textarea>
                       </div>
                     </li>
@@ -121,7 +128,33 @@ export default class CreateCourse extends Component {
 
   // submit
   submit = () => {
-    console.log('here is my submit click calling');
+    // context is my authenticatedUser
+    const { context } = this.props;
+    console.log('what is context here = ', context);
+    const { title, description, estimatedTime, materialsNeeded } = this.state; // saves all entered data
+    console.log('what is state here = ', this.state);
+    const authUser = context.authenticatedUser;
+    const authUserEmail = authUser.emailAddress;
+    const authUserPassword = authUser.password;
+    console.log(
+      'check my variables are correct = ',
+      authUser,
+      authUserEmail,
+      authUserPassword
+    );
+
+    // access the createCourse API call in Data.js
+    // context.data
+    //   .createCourse(course, authUserEmail, authUserPassword)
+    //   .then((errors) => {
+    //     if (errors.length) {
+    //       this.setState(() => {
+    //         return {
+    //           errors: ['Course creation was unsuccessful'],
+    //         };
+    //       });
+    //     }
+    //   });
   };
 
   cancel = () => {

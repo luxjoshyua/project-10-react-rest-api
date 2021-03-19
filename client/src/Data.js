@@ -9,7 +9,6 @@ export default class Data {
     credentials = null
   ) {
     const url = config.apiBaseUrl + path;
-    console.log('what is the url = ', url);
 
     const options = {
       method,
@@ -18,7 +17,7 @@ export default class Data {
       },
     };
 
-    console.log('what are my options = ', options);
+    // console.log('what are my options = ', options);
 
     if (body !== null) {
       options.body = JSON.stringify(body);

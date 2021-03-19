@@ -37,6 +37,11 @@ export default class CourseDetail extends Component {
       });
   }
 
+  // once I call deleteCourse, the course still persists in state
+  // e.g. when you hit the home / route
+  // how to remove completely from state
+  // it does properly delete from the database however
+
   deleteCourse = () => {
     // context is the authenticated user
     const { context } = this.props;

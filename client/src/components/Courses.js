@@ -26,7 +26,7 @@ export default class Courses extends Component {
           courses: data.data,
           user: data.data.User,
         });
-        // console.log(this.state.courses);
+        console.log('what is courses here = ', this.state.courses);
       })
       .catch((error) => {
         console.log('Error fetching and parsing data', error);
@@ -44,6 +44,7 @@ export default class Courses extends Component {
             courses: data.data,
             user: data.data.User,
           });
+          console.log('what is courses here = ', this.state.courses);
         })
         .catch((error) => {
           console.log(error);
@@ -54,7 +55,7 @@ export default class Courses extends Component {
   // then populate the DOM with the fetched data
   render() {
     const results = this.state.courses;
-    console.log('here are my current courses in state = ', results);
+    // console.log('here are my current courses in state = ', results);
 
     let courses = results.map((course) => (
       <React.Fragment key={course.id}>

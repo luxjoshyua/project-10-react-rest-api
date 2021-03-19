@@ -9,6 +9,7 @@ In this project, we had to use React to create a client for our existing school 
 - Clone the repo
 - Open two terminals: one for api, one for client
 - Install dependencies for api using `$ npm install`
+- Install the database for the api using `$ npm run seed`
 - Install dependencies for client using `$ npm install`
 - Start the server for api using `$ npm start`
 - Start the server for client using `$ npm start`

@@ -58,7 +58,7 @@ export default class CreateCourse extends Component {
                   </div>
                   {/* REMOVE THIS ternary once private route implemented */}
                   <p>
-                    By
+                    By{' '}
                     {authUser !== null
                       ? authUser.firstName + ' ' + authUser.lastName
                       : ' no authUser in state'}

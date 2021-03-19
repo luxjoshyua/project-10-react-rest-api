@@ -21,7 +21,6 @@ export default class Courses extends Component {
     axios
       .get(`http://localhost:5000/api/courses`)
       .then((data) => {
-        // console.log("What does data look like", data);
         this.setState({
           courses: data.data,
           user: data.data.User,
@@ -44,7 +43,6 @@ export default class Courses extends Component {
             courses: data.data,
             user: data.data.User,
           });
-          console.log('what is courses here = ', this.state.courses);
         })
         .catch((error) => {
           console.log(error);
@@ -56,7 +54,6 @@ export default class Courses extends Component {
   render() {
     const results = this.state.courses;
     // console.log('here are my current courses in state = ', results);
-
     let courses = results.map((course) => (
       <React.Fragment key={course.id}>
         <div className='grid-33'>

@@ -6,7 +6,6 @@
  *  - renders "Cancel" button that returns user to default route (i.e. list of courses)
  */
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import Form from './Form';
 
 export default class CreateCourse extends Component {
@@ -56,12 +55,8 @@ export default class CreateCourse extends Component {
                       onChange={this.change}
                     />
                   </div>
-                  {/* REMOVE THIS ternary once private route implemented */}
                   <p>
-                    By{' '}
-                    {authUser !== null
-                      ? authUser.firstName + ' ' + authUser.lastName
-                      : ' no authUser in state'}
+                    By {authUser.firstName} {authUser.lastName}
                   </p>
                 </div>
                 <div className='course--description'>

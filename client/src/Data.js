@@ -94,8 +94,22 @@ export default class Data {
 
   // updateCourse goes here
 
-  async updateCourse(arg1, arg2) {
-    console.log('update course being called');
+  async updateCourse(id, course, emailAddress, password) {
+    const response = await this.api(`/courses/${id}`, 'PUT', course, true, {
+      emailAddress,
+      password,
+    });
+    if (response.status === 204) {
+      // console.log(`course successfully updated by ${emailAddress}`);
+    } else if (response.status === 400) {
+      return response.json().then((data) => {
+        return data.errors;
+      });
+    } else if (response.status === 500) {
+      this.props.history.push('/error');
+    } else {
+      throw new Error();
+    }
   }
 
   // send delete request to to /api/courses/:id route

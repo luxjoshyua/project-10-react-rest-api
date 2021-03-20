@@ -38,7 +38,6 @@ export default class CourseDetail extends Component {
           };
         } else {
           this.props.history.push('/');
-          console.log('Course was successfully deleted from the database.');
         }
       })
       .catch((error) => {

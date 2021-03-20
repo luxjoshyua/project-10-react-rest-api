@@ -8,15 +8,12 @@ import { Link } from 'react-router-dom';
  *  - includes buttons for signing in and signing up (if there's not an authenticated user)
  *  - includes user's name and a button for signing out (if there's an authenticated user)
  */
-
 export default class Header extends React.PureComponent {
   render() {
     // extract context from this.props
     const { context } = this.props;
-    // console.log(this.props);
-    // store the authenticatedUser data in a variable
     const authUser = context.authenticatedUser;
-    // console.log('Auth user = ', authUser);
+    console.log('Auth user logged in = ', authUser);
 
     // React.Fragment groups a list of children without adding extra nodes to the DOM
     // if there is an authenticated user stored in context, render a welcome message and a 'sign out' link

@@ -120,8 +120,9 @@ export default class CourseDetail extends Component {
           <div className='grid-25 grid-right'>
             <div className='course--stats'>
               <ul className='course--stats--list'>
+                <h4>Estimated Time</h4>
                 <li className='course--stats--list--item'>
-                  <ReactMarkdown children={result.materialsNeeded} />
+                  <ReactMarkdown children={result.estimatedTime} />
                 </li>
                 <li className='course--stats--list--item'>
                   <h4>Materials Needed</h4>

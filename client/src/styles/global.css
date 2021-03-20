@@ -201,9 +201,23 @@ svg {
 
 /* line 5, ../sass/global.sass */
 body {
-  /* font-family: 'Work Sans', sans-serif; */
   font-family: 'Montserrat', sans-serif;
   background: #fff;
+  background: linear-gradient(-45deg, #0930ff, #51ff00, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* 400, 400 italic, 600, 700 */
@@ -211,7 +225,6 @@ body {
 
 /* line 13, ../sass/global.sass */
 .header {
-  /* background: #0930ff; */
   background: #0930ff;
   padding: 20px 0;
   margin-bottom: 30px;
@@ -224,6 +237,11 @@ body {
   margin: 0;
   display: inline-block;
 }
+
+.header--logo:hover {
+  opacity: 0.8;
+}
+
 /* line 23, ../sass/global.sass */
 .header--logo a {
   color: rgba(255, 255, 255, 0.5);
@@ -252,10 +270,12 @@ body {
 .header nav a {
   color: #fff;
   margin-left: 20px;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 /* line 40, ../sass/global.sass */
 .header nav a:hover {
-  color: #fff;
+  opacity: 0.8;
 }
 
 /* line 44, ../sass/global.sass */
@@ -284,6 +304,7 @@ body {
 h1 {
   font-size: 36px;
   margin-bottom: 20px;
+  letter-spacing: 2px;
 }
 
 /* line 61, ../sass/global.sass */
@@ -350,7 +371,7 @@ p {
 
 /* line 102, ../sass/global.sass */
 .course--module {
-  background: #0930ffc7;
+  background: #0028ff;
   border-radius: 8px;
   padding: 30px;
   margin-bottom: 30px;
@@ -359,7 +380,15 @@ p {
   position: relative;
   box-sizing: border-box;
   box-shadow: -15px -10px 1px 0px rgb(0 0 0 / 30%);
+  /* transition: 0.7s; */
+  /* transition: transform 0.7s; */
 }
+
+.course--module:hover {
+  /* transition: 0.7s; */
+  transform: rotate(360deg);
+}
+
 /* line 2, ../sass/mixins.sass */
 .course--module:before,
 .course--module:after {
@@ -399,12 +428,12 @@ p {
 }
 /* line 133, ../sass/global.sass */
 .course--add--module {
-  background: #eee;
+  background: #000;
   text-align: center;
 }
 /* line 137, ../sass/global.sass */
 .course--add--module:hover .course--add--title {
-  color: #444;
+  color: #0028ff;
 }
 /* line 139, ../sass/global.sass */
 .course--add--module:hover .add {
@@ -412,7 +441,7 @@ p {
 }
 /* line 141, ../sass/global.sass */
 .course--add--title {
-  color: #999;
+  color: #fff;
   display: inline-block;
   font-size: 18px;
   position: absolute;
@@ -442,12 +471,14 @@ p {
 .course--header .course--label {
   font-size: 18px;
   color: #000;
+  font-weight: 600;
 }
 /* line 167, ../sass/global.sass */
 .course--header .course--title {
   font-size: 48px;
   margin-bottom: 15px;
-  color: #332a40;
+  color: #000;
+  letter-spacing: 6px;
 }
 /* line 171, ../sass/global.sass */
 .course--header p {
@@ -457,9 +488,9 @@ p {
 }
 /* line 176, ../sass/global.sass */
 .course--title--input {
-  font-size: 48px;
-  font-weight: bold;
-  font-family: 'Work Sans', sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
 }
 /* line 186, ../sass/global.sass */
 .course--description {
@@ -488,7 +519,7 @@ p {
   border-top: 1px solid #ccc;
   font-size: 16px;
   line-height: 1.8;
-  font-family: 'Cousine';
+  font-family: 'Montserrat', sans-serif;
 }
 /* line 2, ../sass/mixins.sass */
 .course--description li:before,
@@ -528,7 +559,7 @@ p {
 .course--description h1,
 .course--description h2,
 .course--description h3 {
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   color: #222;
   margin-bottom: 30px;
 }
@@ -559,7 +590,7 @@ p {
   font-size: 14px;
   padding: 0 0 10px;
   margin-bottom: 10px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #000;
   text-transform: uppercase;
   letter-spacing: 2px;
   text-overflow: ellipsis;
@@ -568,7 +599,7 @@ p {
 }
 /* line 300, ../sass/global.sass */
 .course--stats--list h3 {
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 18px;
 }
 /* line 303, ../sass/global.sass */
@@ -586,7 +617,7 @@ p {
 }
 /* line 311, ../sass/global.sass */
 .course--time--input {
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 18px;
   font-weight: bold;
   margin: 0;
@@ -607,11 +638,11 @@ textarea {
   padding: 15px;
   font-size: 16px;
   margin: 0 0 20px;
-  border: 1px solid #ccc4d8;
-  color: #666;
+  border: 1px solid #0930ff;
+  color: #000;
   line-height: 1.8;
   outline: none;
-  font-family: 'Cousine';
+  font-family: 'Montserrat', sans-serif;
   box-sizing: border-box;
 }
 /* line 29, ../sass/mixins.sass */
@@ -642,14 +673,19 @@ textarea:focus {
 /* line 488, ../sass/global.sass */
 input {
   width: 100%;
-  color: #332a40;
+  color: #000;
   border-radius: 8px;
-  border: 1px solid #ccc4d8;
+  border: 2px solid #0930ff;
   padding: 15px;
   margin-bottom: 15px;
   outline: none;
   box-sizing: border-box;
   font-size: 16px;
+  box-shadow: 0px 9px 8px rgb(0 0 0 / 20%);
+}
+
+input::placeholder {
+  color: #000;
 }
 /* line 29, ../sass/mixins.sass */
 input::-webkit-input-placeholder {
@@ -693,7 +729,7 @@ input:focus {
 .button {
   background: #0930ff;
   color: #fff;
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 18px;
   padding: 15px 30px;
   border: 0;
@@ -702,23 +738,34 @@ input:focus {
   font-weight: bold;
   display: inline-block;
   box-sizing: border-box;
-  -webkit-transition: background 0.2s;
-  -moz-transition: background 0.2s;
-  -ms-transition: background 0.2s;
-  -o-transition: background 0.2s;
-  transition: background 0.2s;
+  box-shadow: 0px 8px 15px rgb(0 0 0 / 59%);
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -ms-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
 }
 /* line 520, ../sass/global.sass */
 .button:focus {
   outline: none;
 }
 /* line 522, ../sass/global.sass */
-.button:not(.button-secondary):hover {
-  background: #0930ff;
+/* .button:not(.button-secondary):hover {
+  background: #000;
+  color: #fff;
+  box-shadow: 0px 15px 20px #0930ff;
+  transform: translateY(-2px);
+} */
+
+.button:hover {
+  background: #000;
+  color: #fff;
+  box-shadow: 0px 15px 20px #0930ff;
+  transform: translateY(-2px);
 }
 
 /* line 525, ../sass/global.sass */
-.button-secondary {
+/* .button-secondary {
   color: #0930ff;
   background: none;
   box-shadow: 0 0 0 2px #0930ff inset;
@@ -727,12 +774,12 @@ input:focus {
   -ms-transition: box-shadow 0.2s, color 0.2s;
   -o-transition: box-shadow 0.2s, color 0.2s;
   transition: box-shadow 0.2s, color 0.2s;
-}
+} */
 /* line 530, ../sass/global.sass */
-.button-secondary:hover {
-  color: #63537d;
-  box-shadow: 0 0 0 2px #63537d inset;
-}
+/* .button-secondary:hover {
+  color: #0930ff;
+  box-shadow: 0 0 0 2px #0930ff inset;
+} */
 
 /* adds additional padding to the bottom of an element */
 .pad-bottom {

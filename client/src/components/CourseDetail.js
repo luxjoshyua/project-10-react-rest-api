@@ -39,7 +39,6 @@ export default class CourseDetail extends Component {
         } else {
           this.props.history.push('/');
           console.log('Course was successfully deleted from the database.');
-          // force a rerender here of the courses screen somehow?
         }
       })
       .catch((error) => {
@@ -65,23 +64,21 @@ export default class CourseDetail extends Component {
 
   render() {
     const { context } = this.props;
+    const result = this.state.course;
     const authUser = context.authenticatedUser;
-
-    //declares markdown variables
-    const estimatedTimeMarkdown = ` #### Estimated Time \n\n ### ${this.state.course.estimatedTime}`;
-    const materialsNeededMarkdown = `* ${this.state.course.materialsNeeded}`;
+    const { user } = this.state;
 
     return (
       <div>
         <div className='actions--bar'>
           <div className='bounds'>
-            {authUser && authUser.id === this.state.course.userId ? (
+            {authUser && authUser.emailAddress === user.emailAddress ? (
               <React.Fragment>
                 <div className='grid-100'>
                   <span>
                     <Link
                       className='button'
-                      to={`${this.props.match.url}/update`}
+                      to={`/courses/${result.id}/update`}
                     >
                       Update Course
                     </Link>
@@ -100,7 +97,7 @@ export default class CourseDetail extends Component {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                <Link className='button button-secondary' to='/courses'>
+                <Link className='button button-secondary' to='/'>
                   Return to List
                 </Link>
               </React.Fragment>
@@ -111,27 +108,25 @@ export default class CourseDetail extends Component {
           <div className='grid-66'>
             <div className='course--header'>
               <h4 className='course--label'>Course</h4>
-              <h3 className='course--title' key={this.state.course.id}>
-                {this.state.course.title}{' '}
-              </h3>
+              <h3 className='course--title'>{result.title}</h3>
               <p>
-                {this.state.user.firstName} {this.state.user.lastName}
+                {user.firstName} {user.lastName}
               </p>
             </div>
             <div className='course--description'>
-              <p>{this.state.course.description}</p>
+              <ReactMarkdown children={result.description} />
             </div>
           </div>
           <div className='grid-25 grid-right'>
             <div className='course--stats'>
               <ul className='course--stats--list'>
                 <li className='course--stats--list--item'>
-                  <ReactMarkdown source={estimatedTimeMarkdown} />
+                  <ReactMarkdown children={result.materialsNeeded} />
                 </li>
                 <li className='course--stats--list--item'>
                   <h4>Materials Needed</h4>
                   <ul>
-                    <ReactMarkdown source={materialsNeededMarkdown} />
+                    <ReactMarkdown children={result.materialsNeeded} />
                   </ul>
                 </li>
               </ul>

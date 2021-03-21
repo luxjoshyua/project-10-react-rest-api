@@ -52,6 +52,10 @@ export default class UserSignIn extends Component {
               </React.Fragment>
             )}
           />
+          <p>
+            Don't have a user account? <Link to={'/signup'}>Click here</Link> to
+            sign up!
+          </p>
         </div>
       </div>
     );
@@ -83,9 +87,14 @@ export default class UserSignIn extends Component {
         // user isn't found
         if (user === null) {
           this.setState(() => {
-            return { errors: ['Sign-in was unsuccessful'] };
+            return {
+              errors: [
+                'Sign-in was unsuccessful because user is not found, please signup',
+              ],
+            };
           });
         } else {
+          // on successfuly sign, need to redirect to '/home'
           this.props.history.push('/authenticated');
           // from contains info about the pathname an unauthenticated user redirected from (via this.props.location.state)
           this.props.history.push(from);
@@ -95,9 +104,15 @@ export default class UserSignIn extends Component {
       // catch signin errors
       // parameter error is the rejection reason
       .catch((error) => {
-        console.log(error);
-        // navigate user from /signin to /error
-        this.props.history.push('/error');
+        console.log(`Reason for not being able to sign in = ${error}`);
+        // this.props.history.push('/error');
+        this.setState(() => {
+          return {
+            errors: [
+              'Sign-in was unsuccessful, please complete fields and try again.',
+            ],
+          };
+        });
       });
   };
 

@@ -145,7 +145,7 @@ export default class UpdateCourse extends Component {
         if (errors) {
           this.setState(() => {
             return {
-              errors: [`${course} update was unsuccessful`],
+              errors: [`${course.title} update was unsuccessful`],
             };
           });
         } else {

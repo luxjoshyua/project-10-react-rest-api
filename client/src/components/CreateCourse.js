@@ -145,8 +145,9 @@ export default class CreateCourse extends Component {
       .then((errors) => {
         if (errors.length) {
           this.setState(() => {
+            console.log('what is course here = ', course);
             return {
-              errors: ['Course creation was unsuccessful'],
+              errors: [`Course ${course.title} creation was unsuccessful`],
             };
           });
         } else {

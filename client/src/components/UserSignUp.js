@@ -124,6 +124,7 @@ export default class UserSignUp extends Component {
   };
 
   cancel = () => {
-    this.props.history.push('/');
+    // redirect to previous screen
+    this.props.history.push(this.props.history.go(-1));
   };
 }

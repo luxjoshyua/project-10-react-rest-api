@@ -136,7 +136,6 @@ export default class Data {
       emailAddress,
       password,
     });
-    console.log('here is the response sent from get course = ', response);
     if (response.status === 200) {
       console.log('Course was successfully fetched!');
       return response.json().then((data) => data);

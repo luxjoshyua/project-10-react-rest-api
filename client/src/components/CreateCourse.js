@@ -164,7 +164,7 @@ export default class CreateCourse extends Component {
   };
 
   cancel = () => {
-    // redirect to home screen
-    this.props.history.push('/');
+    // redirect to previous screen
+    this.props.history.push(this.props.history.go(-1));
   };
 }

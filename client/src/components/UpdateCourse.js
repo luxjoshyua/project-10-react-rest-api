@@ -15,8 +15,40 @@ export default class UpdateCourse extends Component {
     description: '',
     estimatedTime: '',
     materialsNeeded: '',
+    userId: '',
+    course: [],
+    users: [],
     errors: [],
   };
+
+  componentDidMount() {
+    const { context } = this.props;
+    const authUser = context.authenticatedUser;
+    const authUserEmail = authUser.emailAddress;
+    const authUserPassword = authUser.password;
+    const id = this.props.match.params.id;
+
+    context.data
+      .getCourse(id, authUserEmail, authUserPassword)
+      .then((data) => {
+        if (authUser.id !== data.userId) {
+          this.props.history.push('/forbidden');
+        } else {
+          this.setState({
+            title: data.title,
+            description: data.description,
+            estimatedTime: data.estimatedTime,
+            materialsNeeded: data.materialsNeeded,
+            userId: data.userId,
+            user: data.User,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        this.props.history.push('/forbidden');
+      });
+  }
 
   render() {
     const { context } = this.props;
@@ -143,26 +175,26 @@ export default class UpdateCourse extends Component {
       .updateCourse(id, course, authUserEmail, authUserPassword)
       .then((errors) => {
         if (errors) {
-          this.setState(() => {
-            return {
-              errors: [`${course.title} update was unsuccessful`],
-            };
-          });
+          this.setState({ errors });
+          return {
+            errors: [`Course ${course.title} was not updated in the database.`],
+          };
         } else {
+          this.setState({ course });
           this.props.history.push('/');
           console.log(
-            `Course ${title} has been successfully updated by ${authUser.firstName} ${authUser.lastName}`
+            `Course ${course.title} has been successfully updated by ${authUser.firstName} ${authUser.lastName}`
           );
         }
       })
       .catch((error) => {
         console.log(error);
-        this.props.history.push('/error');
+        this.props.history.push('/forbidden');
       });
   };
 
   cancel = () => {
-    // redirect to home screen
-    this.props.history.push('/');
+    // redirect to previous screen
+    this.props.history.push(this.props.history.go(-1));
   };
 }

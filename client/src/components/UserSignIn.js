@@ -75,7 +75,7 @@ export default class UserSignIn extends Component {
   submit = () => {
     const { context } = this.props;
     const { from } = this.props.location.state || {
-      from: { pathname: '/authenticated' },
+      from: { pathname: '/' },
     };
 
     // unpack the two requisite properties from the state object (this.state) into distinct variables
@@ -94,10 +94,9 @@ export default class UserSignIn extends Component {
             };
           });
         } else {
-          // on successfuly sign, need to redirect to '/home'
-          this.props.history.push('/authenticated');
           // from contains info about the pathname an unauthenticated user redirected from (via this.props.location.state)
           this.props.history.push(from);
+          console.log(this.props.history);
           console.log(`SUCCESS! ${emailAddress} is now signed in!`);
         }
       })
@@ -117,7 +116,7 @@ export default class UserSignIn extends Component {
   };
 
   cancel = () => {
-    // redirect to home screen
-    this.props.history.push('/');
+    // redirect to previous screen
+    this.props.history.push(this.props.history.go(-1));
   };
 }

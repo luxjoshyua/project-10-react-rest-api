@@ -21,8 +21,6 @@ router.get(
   asyncHandler(async (req, res) => {
     const user = req.currentUser;
     // filter the response
-    console.log('what does user look like', user);
-
     res.status(200).json({
       id: user.id,
       firstName: user.firstName,
@@ -50,7 +48,6 @@ router.post(
       }
       // create new User
       await User.create(req.body);
-      console.log(`WHAT IS REQ BODY = ${req.body}`);
       console.log(
         `User ${req.body.firstName} ${req.body.lastName} created successfully!`
       );
@@ -61,7 +58,6 @@ router.post(
         error.name === 'SequelizeUniqueConstraintError'
       ) {
         const errors = error.errors.map((err) => err.message);
-        console.log('what is errors on backend = ', errors);
         res.status(400).json({ errors });
       } else {
         throw error;

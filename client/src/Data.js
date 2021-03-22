@@ -17,8 +17,6 @@ export default class Data {
       },
     };
 
-    // console.log('what are my options = ', options);
-
     if (body !== null) {
       options.body = JSON.stringify(body);
     }
@@ -130,6 +128,7 @@ export default class Data {
     }
   }
 
+  // make get request to /api/courses/:id route
   async getCourse(id, emailAddress, password) {
     const response = await this.api(`/courses/${id}`, 'GET', null, true, {
       emailAddress,

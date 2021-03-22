@@ -21,7 +21,6 @@ export default class UserSignUp extends Component {
 
   render() {
     const { firstName, lastName, emailAddress, password, errors } = this.state;
-    // console.log('what are the errors = ', errors);
 
     return (
       <div className='bounds'>
@@ -104,8 +103,6 @@ export default class UserSignUp extends Component {
       emailAddress,
       password,
     };
-
-    console.log('here is my created user on signup = ', user);
 
     context.data
       .createUser(user)

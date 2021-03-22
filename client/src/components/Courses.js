@@ -25,7 +25,6 @@ export default class Courses extends Component {
           courses: data.data,
           user: data.data.User,
         });
-        // console.log('what is courses here = ', this.state.courses);
       })
       .catch((error) => {
         console.log('Error fetching and parsing data', error);

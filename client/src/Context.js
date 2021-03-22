@@ -34,8 +34,6 @@ export class Provider extends Component {
       },
     };
 
-    // console.log('what is authenticatedUser equal to', authenticatedUser);
-
     return (
       // value={value} represents an object containing the context to be shared throughout the component tree
       <Context.Provider value={value}>{this.props.children}</Context.Provider>

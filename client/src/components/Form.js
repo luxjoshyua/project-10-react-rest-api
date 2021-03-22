@@ -2,6 +2,7 @@ import React from 'react';
 
 export default (props) => {
   const { cancel, errors, submit, submitButtonText, elements } = props;
+  // console.log('what does errors look like in form = ', errors);
 
   function handleSubmit(event) {
     event.preventDefault();

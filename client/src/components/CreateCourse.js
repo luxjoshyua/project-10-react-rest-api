@@ -143,13 +143,13 @@ export default class CreateCourse extends Component {
     context.data
       .createCourse(course, authUserEmail, authUserPassword)
       .then((errors) => {
-        if (errors.length) {
-          this.setState(() => {
-            console.log('what is course here = ', course);
-            return {
-              errors: [`Course ${course.title} creation was unsuccessful`],
-            };
-          });
+        if (errors) {
+          this.setState({ errors });
+          return {
+            errors: [
+              `Course ${course.title} was not successfully created in the database.`,
+            ],
+          };
         } else {
           this.props.history.push('/');
           console.log(

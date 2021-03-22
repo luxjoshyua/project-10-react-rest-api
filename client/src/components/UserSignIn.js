@@ -80,6 +80,7 @@ export default class UserSignIn extends Component {
 
     // unpack the two requisite properties from the state object (this.state) into distinct variables
     const { emailAddress, password } = this.state;
+    // console.log('here is password = ', password);
     // access the sign in function
     context.actions
       .signIn(emailAddress, password)
@@ -96,7 +97,7 @@ export default class UserSignIn extends Component {
         } else {
           // from contains info about the pathname an unauthenticated user redirected from (via this.props.location.state)
           this.props.history.push(from);
-          console.log(this.props.history);
+          // console.log(this.props.history);
           console.log(`SUCCESS! ${emailAddress} is now signed in!`);
         }
       })
@@ -104,7 +105,6 @@ export default class UserSignIn extends Component {
       // parameter error is the rejection reason
       .catch((error) => {
         console.log(`Reason for not being able to sign in = ${error}`);
-        // this.props.history.push('/error');
         this.setState(() => {
           return {
             errors: [

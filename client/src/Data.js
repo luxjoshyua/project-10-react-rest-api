@@ -92,15 +92,14 @@ export default class Data {
     }
   }
 
-  // updateCourse goes here
-
+  // makes put request to update course
   async updateCourse(id, course, emailAddress, password) {
     const response = await this.api(`/courses/${id}`, 'PUT', course, true, {
       emailAddress,
       password,
     });
     if (response.status === 204) {
-      // console.log(`course successfully updated by ${emailAddress}`);
+      console.log(`course successfully updated by ${emailAddress}`);
     } else if (response.status === 400) {
       return response.json().then((data) => {
         return data.errors;

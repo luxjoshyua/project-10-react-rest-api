@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const bcrypt = require('bcryptjs');
 
 const { asyncHandler } = require('../middleware/async-handler');
 const { authenticateUser } = require('../middleware/auth-user');
@@ -41,8 +42,15 @@ router.post(
   '/users',
   asyncHandler(async (req, res) => {
     try {
+      // hash password here
+      if (req.body.password) {
+        let password = req.body.password;
+        const hashedPassword = bcrypt.hashSync(password, 10);
+        req.body.password = hashedPassword;
+      }
       // create new User
       await User.create(req.body);
+      console.log(`WHAT IS REQ BODY = ${req.body}`);
       console.log(
         `User ${req.body.firstName} ${req.body.lastName} created successfully!`
       );
@@ -53,6 +61,7 @@ router.post(
         error.name === 'SequelizeUniqueConstraintError'
       ) {
         const errors = error.errors.map((err) => err.message);
+        console.log('what is errors on backend = ', errors);
         res.status(400).json({ errors });
       } else {
         throw error;

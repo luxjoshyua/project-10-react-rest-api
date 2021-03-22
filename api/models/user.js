@@ -1,7 +1,6 @@
-"use strict";
+'use strict';
 
-const { Model, DataTypes } = require("sequelize");
-const bcrypt = require("bcryptjs");
+const { Model, DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
   class User extends Model {}
@@ -13,10 +12,10 @@ module.exports = (sequelize) => {
         allowNull: false,
         validate: {
           notNull: {
-            msg: "Please provide a first name",
+            msg: 'Please provide a first name',
           },
           notEmpty: {
-            msg: "Please provide a first name",
+            msg: 'Please provide a first name',
           },
         },
       },
@@ -26,10 +25,10 @@ module.exports = (sequelize) => {
         allowNull: false,
         validate: {
           notNull: {
-            msg: "Please provide a last name",
+            msg: 'Please provide a last name',
           },
           notEmpty: {
-            msg: "Please provide a last name",
+            msg: 'Please provide a last name',
           },
         },
       },
@@ -38,17 +37,17 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
         unique: {
-          msg: "This email address already exists",
+          msg: 'This email address already exists',
         },
         validate: {
           isEmail: {
-            msg: "Please provide a valid email address",
+            msg: 'Please provide a valid email address',
           },
           notNull: {
-            msg: "Please provide an email address",
+            msg: 'Please provide an email address',
           },
           notEmpty: {
-            msg: "Please provide an email address",
+            msg: 'Please provide an email address',
           },
         },
       },
@@ -58,16 +57,16 @@ module.exports = (sequelize) => {
         allowNull: false,
         validate: {
           notNull: {
-            msg: "Please provide a password",
+            msg: 'Please provide a password',
           },
           notEmpty: {
-            msg: "Please provide a password",
+            msg: 'Please provide a password',
           },
         },
-        set(val) {
-          const hashedPass = bcrypt.hashSync(val, 10);
-          this.setDataValue("password", hashedPass);
-        },
+        // set(val) {
+        //   const hashedPass = bcrypt.hashSync(val, 10);
+        //   this.setDataValue('password', hashedPass);
+        // },
       },
     },
     { sequelize }
@@ -77,7 +76,7 @@ module.exports = (sequelize) => {
   User.associate = (models) => {
     User.hasMany(models.Course, {
       foreignKey: {
-        fieldName: "userId",
+        fieldName: 'userId',
         allowNull: false,
       },
     });

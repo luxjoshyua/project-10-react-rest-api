@@ -15,12 +15,13 @@ export default class UserSignUp extends Component {
     lastName: '',
     password: '',
     emailAddress: '',
+    password: '',
     errors: [],
   };
 
   render() {
     const { firstName, lastName, emailAddress, password, errors } = this.state;
-    // console.log('what is state here ? = ', this.state);
+    // console.log('what are the errors = ', errors);
 
     return (
       <div className='bounds'>

@@ -44,6 +44,7 @@ export class Provider extends Component {
 
   signIn = async (emailAddress, password) => {
     const user = await this.data.getUser(emailAddress, password);
+    console.log('here is logged in user = ', user);
     // save this password so we can access throughout the app - very important!
     user.password = password;
     // check if there is a user object

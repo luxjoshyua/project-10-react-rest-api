@@ -182,9 +182,6 @@ export default class UpdateCourse extends Component {
         } else {
           this.setState({ course });
           this.props.history.push('/');
-          console.log(
-            `Course ${course.title} has been successfully updated by ${authUser.firstName} ${authUser.lastName}`
-          );
         }
       })
       .catch((error) => {

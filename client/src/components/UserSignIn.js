@@ -95,7 +95,6 @@ export default class UserSignIn extends Component {
         } else {
           // from contains info about the pathname an unauthenticated user redirected from (via this.props.location.state)
           this.props.history.push(from);
-          console.log(`SUCCESS! ${emailAddress} is now signed in!`);
         }
       })
       // catch signin errors

@@ -31,6 +31,8 @@ export default class CreateCourse extends Component {
 
     const authUser = context.authenticatedUser;
 
+    // console.log('what is materials needed here = ', materialsNeeded);
+
     return (
       <div className='bounds course--detail'>
         <h1>Create Course</h1>

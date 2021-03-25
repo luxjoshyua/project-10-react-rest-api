@@ -21,11 +21,10 @@ In this project, we had to use React to create a client for our existing school 
 
 ## Technologies
 
-- JavaScript
-- React (React Router, React Hooks and React Context API)
+- React (React Router and React Context API)
 - Node.js
+- Sequelize
 - Express
 - bcryptjs
 - REST API
 - SQLite
-- SQL ORM Sequelize
